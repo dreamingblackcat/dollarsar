@@ -40,7 +40,7 @@ new Vue({
   methods: {
     getLatestRate: function () {
 
-      this.$http.get("http://localhost:8000/api/v1/latest")
+      this.$http.get("http://c.yelinaung.com/api/v1/latest")
                 .then(function(res){
                   this.message = res.body.data; 
                 }.bind(this));
