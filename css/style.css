@@ -2,3 +2,13 @@ body {
   width: 600px;
   height: 600px;
 }
+
+.converter-panel {
+  border-radius: 23px;
+  padding: 4px;
+}
+
+.bank_name {
+  font-size: 30px;
+  font-weight: 3000;
+}
