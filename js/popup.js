@@ -30,7 +30,8 @@ Vue.component('converter', {
 new Vue({
   el: '#app',
   data: {
-    message: {}
+    message: {},
+    moment: moment
   },
   created: function(){
     console.log("Created");

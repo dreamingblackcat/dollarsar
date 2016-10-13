@@ -5,6 +5,7 @@
     <script src="./js/vue.js"></script>
     <script src="./js/vue-resource.min.js"></script>
     <script src="./js/accounting.js"></script>
+    <script src="./js/moment.js"></script>
     <link rel="stylesheet" href="css/materialize.min.css">
     <link rel="stylesheet" href="css/style.css">
   </head>
@@ -22,7 +23,7 @@
 	  <div class="card">
 	    <div class="card-content teal-text accent-3">
 	      <span class="bank_name">{{ currency.bank_name }} Bank</span>
-	      <span class="right-align">{{ new Date(currency.time).toLocaleDateString() }} </span>
+	      <span class="right-align">{{ moment(currency.time).fromNow() }} </span>
 	      <div v-for="rate in currency.rates"> 
 		<div class="row" v-for="currency_name in Object.keys(rate)"
                   :key="currency.bank_name + '_' + currency_name"> 
@@ -55,7 +56,7 @@
             <label for="{{type}}" class="active">{{currency_name}}</label> 
           </div> 
           <div class="input-field col s6"> 
-            <input id="{{type}}_mmk" type="text" class="validate" v-model="mmkAmount"> 
+            <input v-bind:id="type + '_mmk'" type="text" class="validate" v-model="mmkAmount"> 
             <label for="MMK" class="active">MMK</label> 
           </div>
           <div class="input-field col s12 teal-text darken-2 unit-rate">
