@@ -9,12 +9,20 @@
     <link rel="stylesheet" href="css/style.css">
   </head>
   <body>
+    <div class="navbar-fixed">
+      <nav class="cyan darken-1">
+	<div class="nav-wrapper">
+	    <h5 class="center">Dollarsar Exchange Rate Converter</h5>
+        </div>
+      </nav>
+    </div>
     <div id="app">
       <div class="row">
 	<div v-for="currency in message.currencies" class="col s12">
 	  <div class="card">
 	    <div class="card-content teal-text accent-3">
 	      <span class="bank_name">{{ currency.bank_name }} Bank</span>
+	      <span class="right-align">{{ new Date(currency.time).toLocaleDateString() }} </span>
 	      <div v-for="rate in currency.rates"> 
 		<div class="row" v-for="currency_name in Object.keys(rate)"
                   :key="currency.bank_name + '_' + currency_name"> 
@@ -50,7 +58,7 @@
             <input id="{{type}}_mmk" type="text" class="validate" v-model="mmkAmount"> 
             <label for="MMK" class="active">MMK</label> 
           </div>
-          <div class="input-field col s12 teal-text darken-2">
+          <div class="input-field col s12 teal-text darken-2 unit-rate">
             1 {{currency_name}} = {{rate}} 
           </div>
         </div>
