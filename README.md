@@ -38,3 +38,8 @@ Contributions are highly welcomed. Please feel free to create an issue for any s
 #Credits
 
 - Extension icon is downloaded from [here](https://icons8.com/web-app/7391/currency-exchange)
+- [Ye Lin Aung](https://github.com/yelinaung) for his awesome [API](http://c.yelinaung.com/api/v1/latest)
+
+#License
+
+This repo is released under MIT License which you can read [here](LICENSE)
