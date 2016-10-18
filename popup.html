@@ -82,6 +82,11 @@
                             <h4> <span v-bind:class="mmkColor + '-text'">{{ accounting.formatMoney(mmkAmount, "") }}</span> MMK </h4>
                           </div>
                         </div>
+                        <div class="row">
+                           <div class="col s12">
+                             Last Updated <span class="chip white-text teal lighten-2">{{ moment(bank.time).fromNow() }} </span>
+                           </div>
+                        </div>
                     </div>
                 </div>
             </div>
