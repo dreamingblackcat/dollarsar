@@ -17,83 +17,99 @@
             </link>
         </link>
     </head>
-    <body>          
-      <nav class="title-bar">
-        <h5 class="center">
-            Dollarsar Exchange Rate Converter
-        </h5>
-      </nav>
-
+    <body>
       <div id="app">
-          <div class="row modes">
-              <div class="col s6 center mode" 
-                   v-bind:class="{active: isBuyMode }"
-                   v-on:click="setBuyMode(true)">
-                Buy
-              </div>
-              <div class="col s6 center mode"
-                   v-bind:class="{active: !isBuyMode}"
-                   v-on:click="setBuyMode(false)">
-                Sell
-              </div>
-          </div>
-          <div class="row">
-            <div class="col s12">
-                <div class="row">
-                    <div class="col s3">
-                        <div class="row">
-                          <ul class="collection">
-                            <li class="collection-item"
-                                v-bind:class="{active: bank.bank_name == currency.bank_name}"
-                                v-for="currency in message.currencies" v-on:mouseover="setBank(currency)">
-                              {{ currency.bank_name }}
-                            </li>
-                          </ul>
-                        </div>
-                    </div> 
-                    <div class="col s9">
-                        <div class="row">
-                          <div class="col s9">
-                            <input type="text" v-model="foreignAmount">
-                          </div>
-                          <div class="col s3">
-                            <button class="red btn-floating btn-large" v-on:click="resetAmount()">Reset</button>
-                          </div>
-                          <div class="col s12">
-                            <a class="btn-floating btn-small green waves-effect waves-light center"
-                               v-bind:class="{'active-currency': currentCurrency == 'USD'}" 
-                               v-on:click="setCurrency('USD')">
-                              USD
-                            </a>
-                            <a class="btn-floating btn-small blue waves-effect waves-light center" 
-                               v-bind:class="{'active-currency': currentCurrency == 'SGD'}"
-                               v-on:click="setCurrency('SGD')">
-                              SGD
-                            </a>
-                            <a class="btn-floating btn-small yellow waves-effect waves-light center" 
-                               v-bind:class="{'active-currency': currentCurrency == 'EUR'}"
-                               v-on:click="setCurrency('EUR')">
-                              EUR
-                            </a>
-                          </div>
-                        </div>
-                        <div class="row">
-                          <div class="col s12">
-                            <h4> <span v-bind:class="mmkColor + '-text'">{{ accounting.formatMoney(mmkAmount, "") }}</span> MMK </h4>
-                          </div>
-                        </div>
-                        <div class="row">
-                           <div class="col s12">
-                             Last Updated <span class="chip white-text teal lighten-2">{{ moment(bank.time).fromNow() }} </span>
-                           </div>
-                        </div>
-                    </div>
-                </div>
+        <nav class="title-bar">
+            <h5 class="center">
+                Dollarsar Exchange Rate Converter
+            </h5>
+        </nav>
+        <div v-if="loading">
+          <div class="overlay-loader">
+            <div class="loader">
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
             </div>
           </div>
         </div>
-        <script src="./js/popup.js">
-        </script>
+        <div v-else>
+          <div v-if="apiError != null" class="error">Sorry. The application cannot connect to the data source right now. Sorry for the inconveniences.Please Try Again Later. </div>
+          
+          <div v-else>
+              <div class="row modes">
+                  <div class="col s6 center mode" v-bind:class="{active: isBuyMode }" v-on:click="setBuyMode(true)">
+                      Buy
+                  </div>
+                  <div class="col s6 center mode" v-bind:class="{active: !isBuyMode}" v-on:click="setBuyMode(false)">
+                      Sell
+                  </div>
+              </div>
+              <div class="row">
+                  <div class="col s12">
+                      <div class="row">
+                          <div class="col s3">
+                              <div class="row">
+                                  <ul class="collection">
+                                      <li class="collection-item" v-bind:class="{active: bank.bank_name == currency.bank_name}" v-for="currency in message.currencies" v-on:mouseover="setBank(currency)">
+                                          {{ currency.bank_name }}
+                                      </li>
+                                  </ul>
+                              </div>
+                          </div>
+                          <div class="col s9">
+                              <div class="row">
+                                  <div class="col s9">
+                                      <input type="text" v-model="foreignAmount">
+                                      </input>
+                                  </div>
+                                  <div class="col s3">
+                                      <button class="red btn-floating btn-large" v-on:click="resetAmount()">
+                                          Reset
+                                      </button>
+                                  </div>
+                                  <div class="col s12">
+                                      <a class="btn-floating btn-small green waves-effect waves-light center" v-bind:class="{'active-currency': currentCurrency == 'USD'}" v-on:click="setCurrency('USD')">
+                                          USD
+                                      </a>
+                                      <a class="btn-floating btn-small blue waves-effect waves-light center" v-bind:class="{'active-currency': currentCurrency == 'SGD'}" v-on:click="setCurrency('SGD')">
+                                          SGD
+                                      </a>
+                                      <a class="btn-floating btn-small yellow waves-effect waves-light center" v-bind:class="{'active-currency': currentCurrency == 'EUR'}" v-on:click="setCurrency('EUR')">
+                                          EUR
+                                      </a>
+                                  </div>
+                              </div>
+                              <div class="row">
+                                  <div class="col s12">
+                                      <h4>
+                                          <span v-bind:class="mmkColor + '-text'">
+                                              {{ accounting.formatMoney(mmkAmount, "") }}
+                                          </span>
+                                          MMK
+                                      </h4>
+                                  </div>
+                              </div>
+                              <div class="row">
+                                  <div class="col s12">
+                                      Last Updated
+                                      <span class="chip white-text teal lighten-2">
+                                          {{ moment(bank.time).fromNow() }}
+                                      </span>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+        </div>
       </div>
+      <script src="./js/popup.js">
+      </script>
     </body>
 </html>

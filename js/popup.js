@@ -36,7 +36,9 @@ new Vue({
     isBuyMode: true,
     bank: {},
     currentCurrency: "USD",
-    foreignAmount: 1
+    foreignAmount: 1,
+    apiError: null,
+    loading: true
   },
   created: function(){
     console.log("Created");
@@ -77,7 +79,12 @@ new Vue({
                 .then(function(res){
                   this.message = res.body.data; 
                   this.bank = this.message.currencies[0];
-                }.bind(this));
+                  this.loading = false;
+                }.bind(this), function(errRes){
+                  console.log("Error connecting to API", errRes);
+                  this.apiError = errRes.status;
+                  this.loading  = false;
+                });
     },
     setCurrency: function(currency) {
       this.currentCurrency = currency;
