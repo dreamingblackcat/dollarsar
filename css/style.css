@@ -1,18 +1,29 @@
 body {
-  width: 600px;
-  height: 600px;
+  width: 500px;
+  height: 400px;
+  margin: 0 auto;
 }
 
-.converter-panel {
-  border-radius: 23px;
-  padding: 4px;
+h5 {
+  font-family: roboto;
 }
 
-.bank_name {
-  font-size: 30px;
-  font-weight: 3000;
+.active-currency {
+  border: 2px solid grey;
 }
 
-.unit-rate {
-  font-size: 18px;
+
+.mode {  
+  color: white;
+  background-color: rgb(38, 166, 148);
+  font-size: 1.6em;
+  box-shadow: none;
+  padding: 50px!important;
+}
+
+.mode.active {
+  background-color: #4db6ac;
+  box-shadow: none; 
+  border-bottom: 4px solid #ee6e73;
+  transition: background-color 0.2s linear;
 }
