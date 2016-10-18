@@ -18,7 +18,7 @@
         </link>
     </head>
     <body>          
-      <nav class="nav-wrapper">
+      <nav class="title-bar">
         <h5 class="center">
             Dollarsar Exchange Rate Converter
         </h5>
@@ -45,7 +45,7 @@
                           <ul class="collection">
                             <li class="collection-item"
                                 v-bind:class="{active: bank.bank_name == currency.bank_name}"
-                                v-for="currency in message.currencies" v-on:click="setBank(currency)">
+                                v-for="currency in message.currencies" v-on:mouseover="setBank(currency)">
                               {{ currency.bank_name }}
                             </li>
                           </ul>

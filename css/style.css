@@ -4,6 +4,10 @@ body {
   margin: 0 auto;
 }
 
+.title-bar {
+  padding: 8px;
+}
+
 h5 {
   font-family: roboto;
 }
@@ -18,7 +22,7 @@ h5 {
   background-color: rgb(38, 166, 148);
   font-size: 1.6em;
   box-shadow: none;
-  padding: 50px!important;
+  padding: 20px!important;
 }
 
 .mode.active {
